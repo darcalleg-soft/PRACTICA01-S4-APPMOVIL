@@ -1,5 +1,6 @@
 package com.uteq.practica01_s4
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnConsultar)
             .setOnClickListener { consultarAlumnos() }
+
+        findViewById<Button>(R.id.btnCarrerasMaterias)
+            .setOnClickListener { startActivity(Intent(this, MainActivity2::class.java)) }
 
         consultarAlumnos()
     }

@@ -33,6 +33,12 @@
             android:layout_height="wrap_content"
             android:text="Actualizar lista" />
 
+        <Button
+            android:id="@+id/btnCarrerasMaterias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carreras y materias" />
+
         <ProgressBar
             android:id="@+id/progressMaterias"
             android:layout_width="wrap_content"
