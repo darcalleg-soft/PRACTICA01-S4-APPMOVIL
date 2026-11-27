@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta institucional UTEQ (modo oscuro) -->
+    <color name="uteq_primario">#7DD08F</color>
+    <color name="uteq_sobre_primario">#00391A</color>
+    <color name="uteq_primario_suave">#1E4A28</color>
+    <color name="uteq_sobre_primario_suave">#D7EDDC</color>
+    <color name="uteq_acento">#F2C14E</color>
+    <color name="uteq_fondo">#0F1510</color>
+    <color name="uteq_superficie">#19211B</color>
+    <color name="uteq_borde">#2D3A30</color>
+    <color name="uteq_texto">#E2EAE3</color>
+    <color name="uteq_texto_secundario">#A4B3A7</color>
+</resources>

@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta institucional tomada del logo UTEQ (modo claro) -->
+    <color name="uteq_primario">#18752F</color>          <!-- verde de las letras "UTEQ" -->
+    <color name="uteq_sobre_primario">#FFFFFF</color>
+    <color name="uteq_primario_suave">#D7EDDC</color>
+    <color name="uteq_sobre_primario_suave">#0B3D18</color>
+    <color name="uteq_acento">#B8860B</color>            <!-- dorado de la cinta (tono oscuro para que se lea sobre blanco) -->
+    <color name="uteq_fondo">#F4F6F4</color>
+    <color name="uteq_superficie">#FFFFFF</color>
+    <color name="uteq_borde">#DCE3DD</color>
+    <color name="uteq_texto">#1A231C</color>
+    <color name="uteq_texto_secundario">#5D6B60</color>
 </resources>

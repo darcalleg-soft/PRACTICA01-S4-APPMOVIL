@@ -1,89 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity2">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="240dp"
-        android:layout_height="95dp"
-        android:contentDescription="Logo UTEQ"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_uteq" />
-
-    <!-- Exposed dropdown menu: Semestre (datos de strings.xml) -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuNiveles"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="0dp"
+    <!-- ===== Encabezado institucional ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- El logo va sobre blanco para que se lea también en modo oscuro -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/uteq_borde"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="104dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:contentDescription="Logo UTEQ"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/logo_uteq" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.08"
+                android:text="SISTEMA ACADÉMICO"
+                android:textColor="@color/uteq_acento"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Materias y estudiantes"
+                android:textColor="@color/uteq_primario"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facultad de Ciencias de la Ingeniería · Software"
+                android:textColor="@color/uteq_texto_secundario"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Línea de acento institucional -->
+    <View
+        android:layout_width="48dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/uteq_acento" />
+
+    <!-- ===== Filtros de consulta ===== -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:hint="Semestre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo">
+        app:cardBackgroundColor="@color/uteq_superficie"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/uteq_borde"
+        app:strokeWidth="1dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/actvListaNiveles"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                style="@style/TextoSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filtros de consulta" />
 
-    <!-- Exposed dropdown menu: Materias (datos de Supabase según el nivel) -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuMaterias"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="0dp"
+            <!-- Exposed dropdown menu: Semestre (datos de strings.xml) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/menuNiveles"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Semestre"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:startIconDrawable="@drawable/ic_school">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvListaNiveles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Exposed dropdown menu: Materias (datos de Supabase según el nivel) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/menuMaterias"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:enabled="false"
+                android:hint="Materia"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:helperText="Seleccione primero un semestre"
+                app:startIconDrawable="@drawable/ic_book">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actvListaMaterias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ===== Listado ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
-        android:enabled="false"
-        android:hint="Materia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuNiveles">
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <AutoCompleteTextView
-            android:id="@+id/actvListaMaterias"
-            android:layout_width="match_parent"
+        <TextView
+            style="@style/TextoSeccion"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:layout_weight="1"
+            android:text="Listado de estudiantes" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/txtResumen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/uteq_primario"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="22 registros" />
 
-    <ProgressBar
+    </LinearLayout>
+
+    <!-- Indicador de carga (consultas a Supabase) -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressCarga"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuMaterias" />
+        app:indicatorColor="@color/uteq_acento"
+        app:trackCornerRadius="2dp" />
 
-    <!-- ListView personalizado de alumnos (AlumnoAdapter + item_alumno.xml) -->
-    <ListView
-        android:id="@+id/lvAlumnos"
-        android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressCarga" />
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/uteq_superficie"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/uteq_borde"
+        app:strokeWidth="1dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- ListView personalizado de estudiantes (AlumnoAdapter + item_alumno.xml) -->
+        <ListView
+            android:id="@+id/lvAlumnos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/uteq_borde"
+            android:dividerHeight="1dp" />
+
+        <!-- Se muestra mientras la lista está vacía (ListView.setEmptyView) -->
+        <TextView
+            android:id="@+id/txtEstado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="Seleccione un semestre y una materia para ver el listado de estudiantes."
+            android:textColor="@color/uteq_texto_secundario"
+            android:textSize="14sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

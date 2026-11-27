@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Fila personalizada del ListView de estudiantes (AlumnoAdapter) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="12dp">
+    android:paddingStart="16dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="12dp">
 
     <ImageView
         android:id="@+id/imgFoto"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="14dp"
         android:contentDescription="Foto del estudiante"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_person" />
@@ -26,23 +30,38 @@
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/uteq_texto"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp" />
+            android:layout_marginTop="4dp"
+            android:drawablePadding="6dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/uteq_texto_secundario"
+            android:textSize="13sp"
+            app:drawableStartCompat="@drawable/ic_mail"
+            app:drawableTint="@color/uteq_primario" />
 
         <TextView
             android:id="@+id/txtTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp" />
+            android:layout_marginTop="2dp"
+            android:drawablePadding="6dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/uteq_texto_secundario"
+            android:textSize="13sp"
+            app:drawableStartCompat="@drawable/ic_phone"
+            app:drawableTint="@color/uteq_primario" />
 
     </LinearLayout>
 

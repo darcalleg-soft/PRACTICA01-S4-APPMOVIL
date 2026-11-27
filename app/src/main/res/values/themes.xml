@@ -1,9 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme. Los colores cambian solos en modo oscuro (values-night/colors.xml) -->
     <style name="Base.Theme.PRACTICA01S4APPMOVILSE6" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/uteq_primario</item>
+        <item name="colorOnPrimary">@color/uteq_sobre_primario</item>
+        <item name="colorPrimaryContainer">@color/uteq_primario_suave</item>
+        <item name="colorOnPrimaryContainer">@color/uteq_sobre_primario_suave</item>
+        <item name="colorSecondary">@color/uteq_acento</item>
+        <item name="android:colorBackground">@color/uteq_fondo</item>
+        <item name="colorSurface">@color/uteq_superficie</item>
+        <item name="colorOnSurface">@color/uteq_texto</item>
+        <item name="colorOnSurfaceVariant">@color/uteq_texto_secundario</item>
+        <item name="colorOutline">@color/uteq_borde</item>
+        <item name="android:textColorPrimary">@color/uteq_texto</item>
+        <item name="android:textColorSecondary">@color/uteq_texto_secundario</item>
     </style>
 
     <style name="Theme.PRACTICA01S4APPMOVILSE6" parent="Base.Theme.PRACTICA01S4APPMOVILSE6" />
+
+    <!-- Etiqueta pequeña en mayúsculas para títulos de sección -->
+    <style name="TextoSeccion">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/uteq_texto_secundario</item>
+    </style>
 </resources>

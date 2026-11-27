@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Mismo tema que en modo claro; los colores oscuros vienen de values-night/colors.xml -->
     <style name="Base.Theme.PRACTICA01S4APPMOVILSE6" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/uteq_primario</item>
+        <item name="colorOnPrimary">@color/uteq_sobre_primario</item>
+        <item name="colorPrimaryContainer">@color/uteq_primario_suave</item>
+        <item name="colorOnPrimaryContainer">@color/uteq_sobre_primario_suave</item>
+        <item name="colorSecondary">@color/uteq_acento</item>
+        <item name="android:colorBackground">@color/uteq_fondo</item>
+        <item name="colorSurface">@color/uteq_superficie</item>
+        <item name="colorOnSurface">@color/uteq_texto</item>
+        <item name="colorOnSurfaceVariant">@color/uteq_texto_secundario</item>
+        <item name="colorOutline">@color/uteq_borde</item>
+        <item name="android:textColorPrimary">@color/uteq_texto</item>
+        <item name="android:textColorSecondary">@color/uteq_texto_secundario</item>
     </style>
 </resources>

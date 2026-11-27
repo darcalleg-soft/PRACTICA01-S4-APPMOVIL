@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Header del ListView de alumnos -->
+<!-- Header del ListView de estudiantes: barra institucional al inicio de la lista -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_marginTop="10dp"
-    android:background="#ff0093ff"
-    android:gravity="center"
-    android:text="Lista de Alumnos"
-    android:textColor="#FFFFFF"
+    android:background="@color/uteq_primario"
+    android:gravity="center_vertical"
+    android:letterSpacing="0.08"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:text="LISTA DE ESTUDIANTES"
+    android:textColor="@color/uteq_sobre_primario"
+    android:textSize="12sp"
     android:textStyle="bold" />

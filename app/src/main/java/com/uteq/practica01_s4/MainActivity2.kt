@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ListView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,8 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var menuMaterias: TextInputLayout
     private lateinit var lvAlumnos: ListView
     private lateinit var progressCarga: ProgressBar
+    private lateinit var txtResumen: TextView
+    private lateinit var txtEstado: TextView
 
     private val lstMaterias = ArrayList<String>()
 
@@ -61,6 +64,8 @@ class MainActivity2 : AppCompatActivity() {
         menuMaterias = findViewById(R.id.menuMaterias)
         lvAlumnos = findViewById(R.id.lvAlumnos)
         progressCarga = findViewById(R.id.progressCarga)
+        txtResumen = findViewById(R.id.txtResumen)
+        txtEstado = findViewById(R.id.txtEstado)
 
         configurarNiveles()
         configurarMaterias()
@@ -91,6 +96,12 @@ class MainActivity2 : AppCompatActivity() {
         lstMaterias.clear()
         actvMaterias.setText("", false)
         menuMaterias.isEnabled = false
+        menuMaterias.helperText = "Cargando materias..."
+
+        // Al cambiar de semestre se limpia el listado anterior
+        lvAlumnos.adapter = null
+        txtResumen.text = ""
+        txtEstado.text = "Seleccione una materia para ver el listado de estudiantes."
 
         cargaMaterias = lifecycleScope.launch {
             progressCarga.visibility = View.VISIBLE
@@ -110,14 +121,6 @@ class MainActivity2 : AppCompatActivity() {
                 for (materia in listaMaterias) {
                     lstMaterias.add(materia.nombre ?: "")
                 }
-
-                if (lstMaterias.isEmpty()) {
-                    Toast.makeText(
-                        this@MainActivity2,
-                        "No hay materias registradas en este nivel",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: RestException) {
@@ -136,6 +139,11 @@ class MainActivity2 : AppCompatActivity() {
                     )
                     actvMaterias.setAdapter(adapter)
                     menuMaterias.isEnabled = lstMaterias.isNotEmpty()
+                    menuMaterias.helperText = when (lstMaterias.size) {
+                        0 -> "No hay materias registradas en este semestre"
+                        1 -> "1 materia disponible"
+                        else -> "${lstMaterias.size} materias disponibles"
+                    }
                     progressCarga.visibility = View.GONE
                 }
             }
@@ -147,7 +155,7 @@ class MainActivity2 : AppCompatActivity() {
         actvMaterias.setOnItemClickListener { parent, _, position, _ ->
             val materia = parent.getItemAtPosition(position).toString()
             Toast.makeText(this, "Seleccionaste: $materia", Toast.LENGTH_SHORT).show()
-            cargarAlumnos()
+            cargarAlumnos(materia)
         }
     }
 
@@ -155,6 +163,8 @@ class MainActivity2 : AppCompatActivity() {
     private fun configurarListaAlumnos() {
         val header = layoutInflater.inflate(R.layout.ly_header, lvAlumnos, false)
         lvAlumnos.addHeaderView(header, null, false)
+        // Mientras no haya estudiantes se muestra el mensaje en lugar de la lista
+        lvAlumnos.emptyView = txtEstado
 
         lvAlumnos.setOnItemClickListener { parent, _, position, _ ->
             // Con header, getItemAtPosition ya descuenta la fila del encabezado
@@ -167,10 +177,12 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    private fun cargarAlumnos() {
+    private fun cargarAlumnos(materia: String) {
         var lstAlumnos = ArrayList<Alumno>()
         lifecycleScope.launch {
             progressCarga.visibility = View.VISIBLE
+            txtResumen.text = "Consultando..."
+            txtEstado.text = "Consultando estudiantes de $materia..."
             try {
                 lstAlumnos = ArrayList(
                     SupabaseManager.client
@@ -180,15 +192,23 @@ class MainActivity2 : AppCompatActivity() {
                         }
                         .decodeList<Alumno>()
                 )
+                txtEstado.text = "No hay estudiantes registrados."
             } catch (e: CancellationException) {
                 throw e
             } catch (e: RestException) {
+                txtEstado.text = "No se pudo cargar el listado de estudiantes."
                 SupabaseErrorHandler.show(this@MainActivity2, e)
             } catch (e: Exception) {
+                txtEstado.text = "No se pudo cargar el listado de estudiantes."
                 SupabaseErrorHandler.show(this@MainActivity2, e)
             } finally {
                 val adapter = AlumnoAdapter(this@MainActivity2, lstAlumnos)
                 lvAlumnos.adapter = adapter
+                txtResumen.text = when (lstAlumnos.size) {
+                    0 -> ""
+                    1 -> "1 registro"
+                    else -> "${lstAlumnos.size} registros"
+                }
                 progressCarga.visibility = View.GONE
             }
         }
