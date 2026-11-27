@@ -5,105 +5,85 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="10dp"
     tools:context=".MainActivity2">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnVolver"
-        style="@style/Widget.Material3.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        app:icon="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="291dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/logo"
+        android:layout_width="240dp"
+        android:layout_height="95dp"
         android:contentDescription="Logo UTEQ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnVolver"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_uteq" />
 
-    <TextView
-        android:id="@+id/txtTitulo"
+    <!-- Exposed dropdown menu: Semestre (datos de strings.xml) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuNiveles"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="Carreras y materias"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginEnd="10dp"
+        android:hint="Semestre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
-    <TextView
-        android:id="@+id/lblCarrera"
+        <AutoCompleteTextView
+            android:id="@+id/actvListaNiveles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Exposed dropdown menu: Materias (datos de Supabase según el nivel) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuMaterias"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:labelFor="@id/spnCarrera"
-        android:text="Carrera"
-        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:enabled="false"
+        android:hint="Materia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo" />
+        app:layout_constraintTop_toBottomOf="@id/menuNiveles">
 
-    <Spinner
-        android:id="@+id/spnCarrera"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblCarrera" />
+        <AutoCompleteTextView
+            android:id="@+id/actvListaMaterias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
 
-    <TextView
-        android:id="@+id/lblMateria"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:labelFor="@id/spnMateria"
-        android:text="Materia"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spnCarrera" />
-
-    <Spinner
-        android:id="@+id/spnMateria"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblMateria" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
-        android:id="@+id/progressCatalogo"
+        android:id="@+id/progressCarga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spnMateria" />
+        app:layout_constraintTop_toBottomOf="@id/menuMaterias" />
 
-    <TextView
-        android:id="@+id/txtSeleccion"
+    <!-- ListView personalizado de alumnos (AlumnoAdapter + item_alumno.xml) -->
+    <ListView
+        android:id="@+id/lvAlumnos"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Seleccione una carrera."
-        android:textSize="16sp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressCatalogo" />
+        app:layout_constraintTop_toBottomOf="@id/progressCarga" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

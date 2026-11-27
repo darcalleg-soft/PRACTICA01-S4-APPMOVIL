@@ -62,6 +62,10 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:3.5.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
 
+    // Coil: carga las fotos de los estudiantes desde su URL
+    implementation("io.coil-kt.coil3:coil:3.3.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
